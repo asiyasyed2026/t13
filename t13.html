@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Sharing Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #d6ff93;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .recipes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .recipe {
+            width: 30%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Recipe Sharing Platform</h1>
+    </header>
+
+    <section>
+        <form id="recipeForm">
+            <label for="recipeName">Recipe Name:</label>
+            <input type="text" id="recipeName" required>
+
+            <label for="recipeImage">Recipe Image URL:</label>
+            <input type="url" id="recipeImage" required>
+
+            <label for="recipeDescription">Recipe Description:</label>
+            <textarea id="recipeDescription" required></textarea>
+
+            <button type="button" onclick="addRecipe()">Share Recipe</button>
+        </form>
+
+        <div class="recipes" id="recipesContainer">
+            <!-- Recipe cards will be displayed here -->
+        </div>
+    </section>
+
+    <script>
+        function addRecipe() {
+            const recipeName = document.getElementById('recipeName').value;
+            const recipeImage = document.getElementById('recipeImage').value;
+            const recipeDescription = document.getElementById('recipeDescription').value;
+
+            if (recipeName && recipeImage && recipeDescription) {
+                const recipeContainer = document.getElementById('recipesContainer');
+                const recipeCard = document.createElement('div');
+                recipeCard.className = 'recipe';
+
+                const imageElement = document.createElement('img');
+                imageElement.src = recipeImage;
+                recipeCard.appendChild(imageElement);
+
+                const nameElement = document.createElement('h3');
+                nameElement.textContent = recipeName;
+                recipeCard.appendChild(nameElement);
+
+                const descriptionElement = document.createElement('p');
+                descriptionElement.textContent = recipeDescription;
+                recipeCard.appendChild(descriptionElement);
+
+                recipeContainer.appendChild(recipeCard);
+
+                // Clear form fields
+                document.getElementById('recipeName').value = '';
+                document.getElementById('recipeImage').value = '';
+                document.getElementById('recipeDescription').value = '';
+            }
+        }
+    </script>
+
+</body>
+</html>
